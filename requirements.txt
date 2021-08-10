@@ -1,0 +1,7 @@
+flask
+Flask-SQLAlchemy==2.4.4
+SQLAlchemy==1.3.20
+flask-login==0.4.1
+pymysql
+marshmallow-sqlalchemy
+flask-marshmallow

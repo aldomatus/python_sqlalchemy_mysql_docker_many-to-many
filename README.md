@@ -305,7 +305,8 @@ Blueprints: they are a series of routes that we can integrate into our applicati
 <!-- USAGE EXAMPLES -->
 ## Usage
 <!-- EXPLAIN CODE -->
-## Description of the REST API code
+## Description of the MOdels code
+### __init__.py
 First we create a file inside our app folder which will be called __init__.py this file indicates that the folder is a module, therefore here we can initialize our app
 
 ```python
@@ -319,7 +320,7 @@ def create_app():
     return app
 
 ```
-
+### config.py
 We create a file called config inside our app folder where we configure the connection to the database
 ```python
 class Config():
@@ -329,7 +330,7 @@ class Config():
     SECRET_KEY = 'youtube'
 
 ```
-
+### main.py
 In our main.py that is located in the src folder, we make an instance of our app with create_app which we import from src.app, then we import our blueprints and register them, finally we make an instance of SQLAlchemy and Marshmallow to handle our data API and database.
 ```python
 # Flask libraries
@@ -358,7 +359,7 @@ ma = Marshmallow(app)
 ```
 
 
-### Models 👨 ▶️ 
+### Models.py 👨 ▶️ 
 Inside our app folder we have a file called models.py which contains the models to handle the database tables, the models will help us to create the tables, insert, modify and delete data.
 ```python
 from src.main import db, ma
@@ -409,7 +410,6 @@ db.create_all()
 #### **User model** 👨
 Our first model is the user one which contains a column called user_id, in this column we will save our primary keys, another column is name where we will save the names of the users, in the model you can see a variable called subscriptions, it will not be converted in a column of the users table, it will only serve to maintain the relationship that we must have with channel when a user signs up for a channel.
 
-I have a fake log file for testing 🧪🧪🧪
 ```python
 #------------User Model-----------------
 class User(db.Model):
@@ -428,6 +428,9 @@ class UserSchema(ma.Schema):
 user_schema = UserSchema()
 users_schema = UserSchema(many = True)
 ```
+
+
+
 #### **Channel model** ▶️ 
 Our channel model contains a column called channel_id, in this column we will store our primary keys, another column is name where we will store the names of the channels. Then we have the ChannelSchema class, which is responsible for outlining the models to work serialization with the API.
 ```python
@@ -470,7 +473,44 @@ The most important are the following lines because with them we are going to sav
 
         return jsonify({'message': 'You are subscribed!'})
 ```
-#### All API subs code:
+
+## REST API code 👨‍💻
+
+### users API 👨
+Our user API receives the user's name through a post, outlines it with marshmallow and saves it in the database.
+I have a fake log file for testing 🧪🧪🧪
+```python
+{
+  "name": "Aldo"
+}
+```
+<div align="center">
+ <img src=https://i.imgur.com/mmzj6vB.png  alt="Header" >
+</div>
+
+
+### channel API ▶️ 
+Our user API receives the channel's name through a post, outlines it with marshmallow and saves it in the database.
+I have a fake log file for testing 🧪🧪🧪
+```python
+{
+  "name": "The Beatles"
+}
+```
+<div align="center">
+ <img src=https://i.imgur.com/V3emvuY.png  alt="Header" >
+</div>
+
+
+#### All API subs code 🔔
+Our user API receives the user's id (user_id) and channel's id (channel_id) through a post, outlines it with marshmallow and saves it in the database.
+I have a fake log file for testing 🧪🧪🧪
+```python
+{
+  "user_id": "1",
+  "channel_id": "1"
+}
+```
 
 ```python
 from flask import request, jsonify, Blueprint
@@ -500,13 +540,15 @@ def create_sub():
 
         return jsonify({'message': 'You are subscribed!'})
 ```
+<div align="center">
+ <img src=https://i.imgur.com/1SVm7lz.png  alt="Header" >
+</div>
+
 
 <!-- ROADMAP -->
 ## Roadmap
 
 See the [open issues](https://github.com/aldomatus/flask_rest_api/issues) for a list of proposed features (and known issues).
-
-
 
 <!-- CONTRIBUTING -->
 ## Contributing

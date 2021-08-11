@@ -358,18 +358,148 @@ ma = Marshmallow(app)
 ```
 
 
-### Save a customer submission service to the database 👨 👨 👨 
-To add a parcel delivery record
-We use the post method to receive the data from the front-end, then we save the data sent by request in variables which with SQLALchemy we can put into the database, at the end we commit so that our data is registered in mysql and that's it! we have a shipment saved.
-
-I have a fake log file for testing 🧪🧪🧪
+### Models 👨 ▶️ 
+Inside our app folder we have a file called models.py which contains the models to handle the database tables, the models will help us to create the tables, insert, modify and delete data.
 ```python
-{
+from src.main import db, ma
 
-}
+#---------Models--------------------------
+
+subs = db.Table('subs',
+    db.Column('user_id', db.Integer, db.ForeignKey('users.user_id')),
+    db.Column('channel_id', db.Integer, db.ForeignKey('channels.channel_id'))
+)
+#------------User Model-----------------
+class User(db.Model):
+    __tablename__= 'users'
+    user_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20))
+    subscriptions = db.relationship('Channel', secondary=subs, backref=db.backref('subscribers', lazy='dynamic'))
+
+    def __init__(self, name):
+        self.name = name
+
+class UserSchema(ma.Schema):
+    class Meta:
+        fields = ("user_id", "name")
+
+user_schema = UserSchema()
+users_schema = UserSchema(many = True)
+
+#------------Channel Model-----------------
+class Channel(db.Model):
+    __tablename__= 'channels'
+    channel_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20))
+
+    def __init__(self, name):
+        self.name = name
+
+class ChannelSchema(ma.Schema):
+    class Meta:
+        fields = ("channel_id", "name")
+
+channel_schema = ChannelSchema()
+channels_schema = ChannelSchema(many = True)
+
+db.create_all()
 
 ```
 
+#### **User model** 👨
+Our first model is the user one which contains a column called user_id, in this column we will save our primary keys, another column is name where we will save the names of the users, in the model you can see a variable called subscriptions, it will not be converted in a column of the users table, it will only serve to maintain the relationship that we must have with channel when a user signs up for a channel.
+
+I have a fake log file for testing 🧪🧪🧪
+```python
+#------------User Model-----------------
+class User(db.Model):
+    __tablename__= 'users'
+    user_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20))
+    subscriptions = db.relationship('Channel', secondary=subs, backref=db.backref('subscribers', lazy='dynamic'))
+
+    def __init__(self, name):
+        self.name = name
+
+class UserSchema(ma.Schema):
+    class Meta:
+        fields = ("user_id", "name")
+
+user_schema = UserSchema()
+users_schema = UserSchema(many = True)
+```
+#### **Channel model** ▶️ 
+Our channel model contains a column called channel_id, in this column we will store our primary keys, another column is name where we will store the names of the channels. Then we have the ChannelSchema class, which is responsible for outlining the models to work serialization with the API.
+```python
+#------------Channel Model-----------------
+class Channel(db.Model):
+    __tablename__= 'channels'
+    channel_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20))
+
+    def __init__(self, name):
+        self.name = name
+
+class ChannelSchema(ma.Schema):
+    class Meta:
+        fields = ("channel_id", "name")
+
+channel_schema = ChannelSchema()
+channels_schema = ChannelSchema(many = True)
+```
+
+#### **Bridge Table** 🌉 
+
+This is our bridge table does not need a class, in this class we will save the relationships between users and channels, joining a user_id with a channel_id, in this way we will know which users are subscribed with which channels
+
+```python
+subs = db.Table('subs',
+    db.Column('user_id', db.Integer, db.ForeignKey('users.user_id')),
+    db.Column('channel_id', db.Integer, db.ForeignKey('channels.channel_id'))
+)
+
+```
+
+### Add a subscription 🔔
+To create the subscription API we have to make use of the post method where we will receive the user_id which is the primary key of the user and the channel_id which is the primary key of the channel.
+#### Save our subscriptions 
+The most important are the following lines because with them we are going to save the subscription records in our database :
+```python
+        channel.subscribers.append(user)
+        db.session.commit()
+
+        return jsonify({'message': 'You are subscribed!'})
+```
+#### All API subs code:
+
+```python
+from flask import request, jsonify, Blueprint
+
+subs = Blueprint('subs', __name__)
+
+@subs.route('/subs', methods=['GET'])
+def users_regards():
+    return jsonify({'message': 'Welcome!'})
+
+@subs.route('/sub', methods=['GET','POST'])
+def create_sub():
+    from src.app.models import Channel
+    from src.app.models import User
+    from src.main import db
+
+    # Receive requests
+    if request.method == 'POST':
+        user_id = request.json['user_id']
+        channel_id = request.json['channel_id']
+
+        user = User.query.filter_by(user_id=user_id).first()
+        channel = Channel.query.filter_by(channel_id=channel_id).first()
+
+        channel.subscribers.append(user)
+        db.session.commit()
+
+        return jsonify({'message': 'You are subscribed!'})
+```
 
 <!-- ROADMAP -->
 ## Roadmap

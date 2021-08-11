@@ -9,18 +9,14 @@
 <br />
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://i.imgur.com/19coMSB.png" alt="Header" >
+    <img src="https://i.imgur.com/yu0eHMd.png" alt="Header" >
   </a>
    <div align="center">
    <a href="https://www.facebook.com/aldo.matusmartinez" ><img src="https://github.com/edent/SuperTinyIcons/blob/master/images/svg/facebook.svg" title="Facebook" width="60"  margin="30px"/></a><a href="https://github.com/aldomatus/" ><img src="https://github.com/edent/SuperTinyIcons/blob/master/images/svg/github.svg" title="Github" width="60"/></a><a href="https://www.instagram.com/aldomatus1/" ><img src="https://github.com/edent/SuperTinyIcons/blob/master/images/svg/instagram.svg" title="Instagram" width="60"  /></a><a href="https://www.linkedin.com/in/aldomatus/" ><img src="https://github.com/edent/SuperTinyIcons/blob/master/images/svg/linkedin.svg" title="Linkedin" width="60"  /></a>
 
   </div>
-  <h1 align="center">THIS PROJECT WAS MADE FOR Cura Deuda ® 📊👨‍💼 </h1>
+  <h1 align="center">THIS PROJECT WAS MADE TO LEARN TO USE MANY-TO-MANY RELATIONSHIPS WITH THE SQLALCHEMY ORM </h1>
   <h3 align="center">Learn REST API with Flask, Mysql and Docker</h3>
-
-  <p align="center">
-    A project for you to learn to work a flask REST api with docker and the mysql database manager!
-  </p>
 </p>
 
 
@@ -54,31 +50,13 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Problema
-Gustavo quiere iniciar un negocio de envíos por paquetería y le gustaría contar con la
-información de Estados, Municipios, Colonias ligados a SEPOMEX.
-1. Obten una copia de la información expuesta en el sitio de SEPOMEX
-2. Modela las tablas para la información de SEPOMEX.
-a. Separa la información en, por lo menos, 3 tablas: Estado, Municipio, Colonia
-b. Relaciona tus tablas por medio de sus identificadores diseñados por
-SEPOMEX
-3. Desarrolla una técnica de carga de los datos a partir de la información de SEPOMEX
-que pueda ejecutarse a demanda (seed script).
-4. Crea un API para obtener los datos del registro de cada recurso modelado.
-a. El intercambio de datos se debe dar por medio de la estructura JSON.
-5. Permita a tu API por lo menos:
-a. Búsqueda de colonias por CP
-b. Búsqueda de colonias, municipios, estados por nombre
-c. Adición de nuevos registros a los recursos.
-6. Agrega el manejo de errores.
-7. Agrega una capa de seguridad a tu API (Basic Auth, Token, APIkey, etc.)
-8. Muestra tu proyecto live en alguna plataforma en la nube.
-9. Empaqueta tu aplicación en un contenedor de Docker
-10. Diseña un sitio web, full responsive para interactuar con tu API.
+At the beginning of my career I had problems like these and today I share what I know to make your path in software development easier. In this installment I show you how to use the orm called flask-sqlalchemy with many to many tables in which we have a bridge table. If you want to know about bridge tables: [Bridge Tables](https://www.ibm.com/docs/en/cognos-analytics/11.1.0?topic=relationships-bridge-tables)
 
 ## Purpose of the project 🚀
 This project is made with the intention of teaching how to use Docker with the backend technologies Flask and Mysql in the project we are going to take into account the following points:
-
+* Create a database with normalized tables via bridge tables
+* Make a many to many relationship between tables.
+* handling many to many relationships with the flask sqlalchemy ORM.
 * Create the dockerfile that will have the necessary instructions to create a Python image that will later be converted into a single application.
 * Docker Compose allows you through YAML files to instruct the Docker Engine to perform tasks, programmatically. Here we will install the mysql image, declare the environment variables for both mysql and Flask, and also declare the volumes.
 * We will add the list of requirements in a requirements.txt file that will be executed automatically within the Dockerfile
@@ -89,6 +67,7 @@ This section should list any major frameworks that you built your project using.
 * [Flask](https://flask.palletsprojects.com/en/2.0.x/)
 * [Mysql](https://www.mysql.com/)
 * [Docker](https://www.docker.com/)
+* [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
 
 ### Libraries
 
@@ -140,24 +119,15 @@ For this project you need to have Docker and Docker compose installed
 </li>
 
 ### knowing our data
-First we analyze the SEPOMEX data to select the data that is important to us for the process of creating our application 
-
-The Mexican Postal Service, Correos de México has the function of keeping the population communicated by offering accessible, reliable and quality correspondence, messaging and parcel services, with the mission of being a factor of inclusion of the population, facilitator of economic activity and guarantor of interpersonal communications. 
+To start, the project is a kind of YouTube in which we are going to have users and channels, among them we can make the relationship many to many because many users are subscribed to many channels and many channels have many users. We will have three tables: users, channels and a third that will inform us of the subscriptions of each user. In the third table we will join the primary keys of each table (users and channels)
 <div align="center">
- <img src=https://4.bp.blogspot.com/-PmNkfNoApz8/WrW0kFJ--fI/AAAAAAAAA04/Twmw29bZNfwBEmwkoiFnrZmbFurywfZ5wCLcBGAs/s1600/Sepomex-1802342.jpg width=250 alt="Header" >
-</div>
-
-
-
-#### The columns selected for the project were colored blue, these are the data that will serve us for our application 🔵
-<div align="center">
- <img src=https://i.imgur.com/jjsjTjS.png alt="Header" >
+ <img src=https://static.coodex.es/wp-content/uploads/2014/10/usuarios-youtube-espana-1.jpg width=250 alt="Header" >
 </div>
 
 ### Entity relationship model
 For the construction of the database, the relationship entity model was made with which the relationships between each table were deduced. 
 <div align="center">
- <img src=https://i.imgur.com/lecY2Qo.jpg width=500 alt="Header" >
+ <img src=https://i.imgur.com/osfDbYs.png alt="Header" >
 </div>
 
 
@@ -166,7 +136,7 @@ For the construction of the database, the relationship entity model was made wit
 1. To obtain my repository you must create a folder in a desired directory and within this folder open a terminal or use cmd in the case of windows.
 2. Clone the repo
    ```
-   git remote add origin git@github.com:aldomatus/python_rest_api_mysql_docker.git
+   git remote add origin git@github.com:aldomatus/python_sqlalchemy_mysql_docker_many-to-many
    
    ```
 3. Make the pull request from a branch called main
@@ -185,88 +155,18 @@ For the construction of the database, the relationship entity model was made wit
    ```
    docker-compose up
    ```
-5. Inside the project folder open another command terminal and type the following to enter interactive mode and enter mysql
-   ```
-   docker-compose exec db bash
-   ```
-6. Then we enter mysql from the command console, it will ask you for a password, type root
-   ```
-   mysql -h localhost -u root -p
-   ```
-7. We create our database
-   ```
-   CREATE DATABASE flask;
-   ```
-   
-8. We enter the database
-   ```
-   USE flask;
-   ```
-9. We do a query, and if the script has not given you problems you can see something like this:
-   ```sql
-   
-    mysql> SELECT * FROM address limit 5;
-   +----+-------------+--------+--------------+----------------------------+--------------------------------+
-   | id | postal_code | state  | municipality | city                       | colony                         |
-   +----+-------------+--------+--------------+----------------------------+--------------------------------+
-   |  1 | 72000       | Puebla | Puebla       | Heroica Puebla de Zaragoza | Centro                         |
-   |  2 | 72000       | Puebla | Puebla       | Heroica Puebla de Zaragoza | San Francisco                  |
-   |  3 | 72010       | Puebla | Puebla       | Heroica Puebla de Zaragoza | Santa Mar�a la Rivera          |
-   |  4 | 72010       | Puebla | Puebla       | Heroica Puebla de Zaragoza | INFONAVIT Bosques 5 de Febrero |
-   |  5 | 72010       | Puebla | Puebla       | Heroica Puebla de Zaragoza | Residencial Santa Mar�a        |
-   +----+-------------+--------+--------------+----------------------------+--------------------------------+
-
-   ```
 10. Now we are ready to work and query from sql alchemy
 
-12. If all goes well, our application should already be executing the app.py file with python using the mysql database, now we just have to check by entering the following link in our browser:
+12. If all goes well, our application should already be executing the main.py file with python using the mysql database, now we just have to check by entering the following link in our browser:
 
    ```
    http://localhost:5000/
    ```
 6. You should have a response like this:
    ```
-   {"message": 'Welcome to Cura Deuda ® API'}
+   {"message": 'Welcome to my API'}
   
    ```
-
-## How to load the data to the database 📂📂📂
-I built a script to load the data with the help of the csv and sqlalchemy library as follows: 
-1. We load the csv data
-2. We read it with csv.reader
-3. This file is delimited by commas
-4. We started a counter to avoid the title line
-5. We save the data in each extraction in its corresponding variable
-6. We use sqlalchemy to send the data to mysql with the model 
-
-
-```python
-#-----------------Upload the SEPOMEX files to the database---------------
-# Seed script
-def import_data(file):
-    """
-    Seed script to import SEPOMEX data to MySQL database
-    """
-    with open(str(file)) as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        line_counter = 0
-        for row in csv_reader:
-            if line_counter != 0:
-                if line_counter == 100:
-                    print('hola')
-                postal_code=row[0]
-                colony=row[1]
-                municipality=row[3],
-                state=row[4]
-                city=row[5]
-                
-                new_address= Address(postal_code, state, municipality, city, colony)
-                db.session.add(new_address)
-                db.session.commit()
-            line_counter += 1
-
-import_data('puebla.csv')
-```
 
 ## Description of the files 💼 🐳
 ```python
@@ -289,14 +189,10 @@ In our requirements file we write the flask libraries, the connection libraries 
 flask
 Flask-SQLAlchemy==2.4.4
 SQLAlchemy==1.3.20
+flask-login==0.4.1
 pymysql
 marshmallow-sqlalchemy
-Flask-Migrate==2.5.3
-Flask-Script==2.0.6
-Flask-Cors==3.0.9
-requests==2.25.0
 flask-marshmallow
-pika==1.1.0
 ```
 
 ### Dockerfile 🐳
@@ -311,7 +207,7 @@ FROM python:3.7-alpine
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
 WORKDIR /code
-ENV FLASK_APP=app.py
+ENV FLASK_APP=src/main.py
 ENV FLASK_RUN_HOST=0.0.0.0
 RUN apk add --no-cache gcc musl-dev linux-headers
 COPY requirements.txt requirements.txt
@@ -342,10 +238,10 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: shipping_01  
+      MYSQL_DATABASE: youtube 
       MYSQL_PASSWORD: root
     ports: 
-      - 3307:3306
+      - 3308:3306
 
   backend:
     build:
@@ -367,13 +263,34 @@ This file contains our environment variables that will be read by the dockerfile
 
 ```
 FLASK_DEBUG=True
-FLASK_APP=src/app.py
+FLASK_APP=src/main.py
 FLASK_RUN_HOST=0.0.0.0
 ALLOWED_HOSTS=127.0.0.1,localhost
 ```
 ### Project structure 
 To make the modularization of our project we can make use of blueprints 
 
+```script
+.
+├── docker-compose.yml
+├── Dockerfile
+├── ERM.drawio
+├── README.md
+├── requirements.txt
+├── src
+│   ├── app
+│   │   ├── channels
+│   │   ├── config.py
+│   │   ├── __init__.py
+│   │   ├── models.py
+│   │   ├── __pycache__
+│   │   ├── subs
+│   │   └── users
+│   ├── __init__.py
+│   ├── main.py
+│   └── __pycache__   
+└── venv
+```
 #### Use of Blueprints
 Blueprints: they are a series of routes that we can integrate into our application but in another directory that is, it will allow me to modulate the application into small applications that do specific things such as authentication or the welcome part, or if we have a task dashboard for Example we would also create a blueprint for the specific tasks and it is easier to handle.
 
@@ -389,82 +306,56 @@ Blueprints: they are a series of routes that we can integrate into our applicati
 ## Usage
 <!-- EXPLAIN CODE -->
 ## Description of the REST API code
-With this base you can make any flask code, modify the API and adapt it to your projects. It is important that you study the docker code to understand what is behind each file in both the Docker and the docker-compose.yml.
-
-### To obtain the colonies by zip code
-- To obtain the colonies by zip code, you only have to obtain the zip code in the url and use a filter that brings us those colonies with the same zipcode, in the example we sent http: // localhost: 5000 / address / 72000 and it did not bring the json with the colonies with code 72000
-```python
-  
-# Search for colonies by zip code
-@app.route('/address/cp/<string:postal_code>', methods=['GET'])
-def get_colonies(postal_code):
-    colonies = Address.query.filter_by(postal_code=postal_code).all()
-    result = addresses_schema.dump(colonies)
-    return jsonify(result)
-```
-<p align="center">
-  <a href="https://github.com/aldomatus/python_rest_api_mysql_docker">
-    <img src="https://i.imgur.com/v6y7AS4.png" alt="Header" >
-  </a>
-</p>
-### For the search of colonies by name
-For the search of colonies by name,something similar to the search by postal code was done, it is only necessary to write the name of the colony to search in the link as shown below:
-http: // localhost: 5000 / address / nameplaces / Centro
+First we create a file inside our app folder which will be called __init__.py this file indicates that the folder is a module, therefore here we can initialize our app
 
 ```python
-  
-# search for colonies, municipalities and states by name
-@app.route('/address/nameplaces/<string:place>', methods=['GET'])
-def get_places(place):
-    colonies = Address.query.filter_by(colony=place).all()
-    result = addresses_schema.dump(colonies)
-    return jsonify(result)
+from flask import Flask
+from .config import Config
+
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
+
+    return app
+
 ```
 
-<p align="center">
-  <a href="https://github.com/aldomatus/python_rest_api_mysql_docker">
-    <img src="https://i.imgur.com/nwUslJq.png" alt="Header" >
-  </a>
-</p>
-
-### To add new records
-we create our json to send, and we send it with the POST method, the api responds with the data that was saved in the database
-we create our json to send
-```json
-{
-"postal_code": "45672",
-"state": "Yucatán", 
-"municipality": "Guadalupe", 
-"city": "Mérida", 
-"colony": "Centro"
-}
-```
-
-
+We create a file called config inside our app folder where we configure the connection to the database
 ```python
-# To create news addresses
-@app.route('/address', methods=['POST'])
-def create_address():
-    # Receive requests
-    if request.method == 'POST':
-        postal_code = request.json['postal_code']
-        state = request.json['state']
-        municipality = request.json['municipality']
-        city = request.json['city']
-        colony = request.json['colony']
+class Config():
+    #-------------------database connection------------
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root@db/youtube'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = 'youtube'
 
-        new_address= RemitentAddress(postal_code, state, municipality, city, colony)
-
-        db.session.add(new_address)
-        db.session.commit()
-
-        return address_schema.jsonify(new_address)
 ```
-<p align="center">
-  <a href="https://github.com/aldomatus/python_rest_api_mysql_docker">
-    <img src="https://i.imgur.com/SDh8PkY.png" alt="Header" >
-  </a>
-</p>
+
+In our main.py that is located in the src folder, we make an instance of our app with create_app which we import from src.app, then we import our blueprints and register them, finally we make an instance of SQLAlchemy and Marshmallow to handle our data API and database.
+```python
+# Flask libraries
+from src.app import create_app
+from flask import Flask, blueprints, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
+
+app = create_app()
+
+# ------------Registro de los blueprints----
+from src.app.users.users import users
+from src.app.channels.channels import channels
+from src.app.subs.subs import subs
+from src.app.home.home import home
+
+app.register_blueprint(users)
+app.register_blueprint(channels)
+app.register_blueprint(subs)
+app.register_blueprint(home)
+
+#--------Instances SQLALchemy and Marshmallow---------
+db = SQLAlchemy(app)
+ma = Marshmallow(app)
+
+```
 
 
 ### Save a customer submission service to the database 👨 👨 👨 
@@ -474,106 +365,11 @@ We use the post method to receive the data from the front-end, then we save the 
 I have a fake log file for testing 🧪🧪🧪
 ```python
 {
-"_comment": "shipping--------------------------",
-"contents": "Books", 
-"product_value": 1000, 
-"description": "artificial intelligence and math books", 
-"delivered": 1, 
-"shipping_price": 20,
-"__comment2__": "Remitent address--------------",
-"postal_code_r": "68000",
-"state_r": "Oaxaca", 
-"municipality_r": "Huajuapan", 
-"city_r": "Huajuapan", 
-"colony_r": "Reforma",
-"__comment3__": "Remitent info-----------------",
-"name_r": "Pedro", 
-"last_name_r": "Lopez", 
-"address_r": "Merida Yucatan", 
-"phone_r": "955768952", 
-"postal_code_r": "72000",
-"__comment4__": "Destinatary address-----------",
-"postal_code_d": "68000",
-"state_d": "Oaxaca", 
-"municipality_d": "Huajuapan", 
-"city_d": "Huajuapan", 
-"colony_d": "Reforma",
-"__comment5__": "Destinatary info--------------",
-"name_d": "Pedro", 
-"last_name_d": "Lopez", 
-"address_model_d": "Merida Yucatan", 
-"phone_d": "955744982", 
-"postal_code_d": "72000"
+
 }
 
 ```
-**Save parcel service records**
-```python
-@app.route('/shippings', methods=['POST', 'GET'])
-def create_shipping():
 
-    # Receive requests
-    if request.method == 'POST':
-
-        # shipping information
-        contents = request.json['contents']
-        product_value = request.json['product_value']
-        description = request.json['description']
-        delivered = request.json['delivered']
-        shipping_price = request.json['shipping_price']
-        shipping_date = datetime.today()
-
-        new_shipping= Shipping(contents, product_value, description, delivered, shipping_price, shipping_date)
-        db.session.add(new_shipping)
-        
-
-        # Remitent information
-        name_r = request.json['name_r']
-        last_name_r = request.json['last_name_r']
-        phone_r = request.json['phone_r']
-
-        postal_code_r = request.json['postal_code_r']
-        state_r = request.json['state_r']
-        municipality_r = request.json['municipality_r']
-        city_r = request.json['city_r']
-        colony_r = request.json['colony_r']
-
-        new_address_r= RemitentAddress(postal_code_r, state_r, municipality_r, city_r, colony_r)
-        db.session.add(new_address_r)
-
-        new_remitent = Remitent(name_r, last_name_r, phone_r)
-        db.session.add(new_remitent)
-
-        # Destinatary information
-        name_d = request.json['name_d']
-        last_name_d = request.json['last_name_d']
-        address_model_d = request.json['address_model_d']
-        phone_d = request.json['phone_d']
-        postal_code_d = request.json['postal_code_d']
-
-        postal_code_d = request.json['postal_code_d']
-        state_d = request.json['state_d']
-        municipality_d = request.json['municipality_d']
-        city_d = request.json['city_d']
-        colony_d = request.json['colony_d']
-        
-        new_address_d= DestinataryAddress(postal_code_d, state_d, municipality_d, city_d, colony_d)
-        db.session.add(new_address_d)
-
-        new_destinatary= Destinatary(name_d, last_name_d, address_model_d, phone_d, postal_code_d)
-        db.session.add(new_destinatary)
-
-        db.session.commit()
-        return destinatary_schema.jsonify(new_destinatary)
-
-
-    return jsonify({'message': 'Data stored successfully!'})
-```
-<p align="center">
-  <a href="https://github.com/aldomatus/python_rest_api_mysql_docker">
-    <img src="https://i.imgur.com/ilWl4X3.png" alt="Header" >
-  </a>
-</p>
 
 <!-- ROADMAP -->
 ## Roadmap

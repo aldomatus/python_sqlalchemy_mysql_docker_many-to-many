@@ -462,7 +462,34 @@ subs = db.Table('subs',
 )
 
 ```
+#### This is how our tables will look
+```sql
+Database changed
+mysql> SELECT * FROM users;
++---------+------+
+| user_id | name |
++---------+------+
+|       1 | Aldo |
++---------+------+
+1 row in set (0.00 sec)
 
+mysql> SELECT * FROM channels;
++------------+-------------+
+| channel_id | name        |
++------------+-------------+
+|          1 | The Beatles |
++------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM subs;
++---------+------------+
+| user_id | channel_id |
++---------+------------+
+|       1 |          1 |
++---------+------------+
+1 row in set (0.00 sec)
+
+```
 ### Add a subscription 🔔
 To create the subscription API we have to make use of the post method where we will receive the user_id which is the primary key of the user and the channel_id which is the primary key of the channel.
 #### Save our subscriptions 
